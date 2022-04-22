@@ -1,0 +1,6 @@
+
+*.pgm
+*.FCStd
+*.FCStd1
+
+**/__pycache__
