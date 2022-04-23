@@ -143,6 +143,45 @@
         </item>
        </layout>
       </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>8</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+          <widget class="Gui::PrefCheckBox" name="checkBox_1">
+            <property name="toolTip">
+              <string>If checked, polar X-coordinate will be divided by 2. </string>
+            </property>
+            <property name="text">
+              <string>Half scaled X-coordinate</string>
+            </property>
+            <property name="checked">
+              <bool>true</bool>
+            </property>
+            <property name="prefEntry" stdset="0">
+              <cstring>halfXCoordinate</cstring>
+            </property>
+            <property name="prefPath" stdset="0">
+              <cstring>Mod/PolarCoordinatesExporter</cstring>
+            </property>
+          </widget>
+        </item>
+       </layout>
+      </item>
      </layout>
     </widget>
    </item>
@@ -164,11 +203,6 @@
  <layoutdefault spacing="6" margin="11"/>
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
-  <customwidget>
-   <class>Gui::PrefCheckBox</class>
-   <extends>QCheckBox</extends>
-   <header>Gui/PrefWidgets.h</header>
-  </customwidget>
   <customwidget>
    <class>Gui::PrefDoubleSpinBox</class>
    <extends>QDoubleSpinBox</extends>

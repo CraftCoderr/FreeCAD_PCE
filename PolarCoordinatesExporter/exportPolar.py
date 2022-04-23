@@ -49,8 +49,9 @@ def export(exportList, filename):
     step = parameters.GetFloat('discretizationStep')
     x_accuracy = parameters.GetFloat('xCoordinateAccuracyThreshold')
     c_accuracy = parameters.GetFloat('cCoordinateAccuracyThreshold')
+    x_scaling = parameters.GetBool('halfXCoordinate')
 
-    FreeCAD.Console.PrintMessage('step: {}, x_ac: {}, c_ac: {}'.format(step, x_accuracy, c_accuracy))
+    FreeCAD.Console.PrintMessage('step: {}, x_ac: {}, c_ac: {}, x_scaling: {}'.format(step, x_accuracy, c_accuracy, x_scaling))
 
     x_accuracy = min(x_accuracy, step)
     c_accuracy = min(c_accuracy, step)
@@ -66,6 +67,9 @@ def export(exportList, filename):
         for point in ob.Shape.discretize(Distance=step):
             r, fi = cartesian_to_polar(point.x, point.y)
             fi = to_degrees(fi)
+
+            if x_scaling:
+                r = r / 2.0
 
             append_r = (prev_r is None) or (abs(prev_r - r) > x_accuracy)
             append_fi = (prev_fi is None) or (abs(prev_fi - fi) > c_accuracy)
