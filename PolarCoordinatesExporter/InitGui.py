@@ -2,7 +2,8 @@
 
 import FreeCAD
 import FreeCADGui
+import path_utils
 
 from PySide.QtCore import QT_TRANSLATE_NOOP
 
-FreeCADGui.addPreferencePage("Mod/PolarCoordinatesExporter/preferences-export.ui", QT_TRANSLATE_NOOP("PolarCoordinatesExporter", "Import-Export"))
+FreeCADGui.addPreferencePage(path_utils.get_workbench_file_path("preferences-export.ui"), QT_TRANSLATE_NOOP("PolarCoordinatesExporter", "Import-Export"))
