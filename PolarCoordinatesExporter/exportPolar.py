@@ -48,12 +48,11 @@ def export(exportList, filename):
     step = parameters.GetFloat('discretizationStep')
     x_accuracy = parameters.GetFloat('xCoordinateAccuracyThreshold')
     c_accuracy = parameters.GetFloat('cCoordinateAccuracyThreshold')
+    c_max_step = parameters.GetFloat('cCoordinateMaxStep')
     x_scaling = parameters.GetBool('halfXCoordinate')
 
-    FreeCAD.Console.PrintMessage('step: {}, x_ac: {}, c_ac: {}, x_scaling: {}'.format(step, x_accuracy, c_accuracy, x_scaling))
-
-    x_accuracy = min(x_accuracy, step)
-    c_accuracy = min(c_accuracy, step)
+    FreeCAD.Console.PrintMessage('Export params step: {}, x_ac: {}, c_ac: {}, c_max: {}, x_scaling: {}\n'.format(
+        step, x_accuracy, c_accuracy, c_max_step, x_scaling))
 
     # Use the native Python open which was saved as `pythonopen`
     output_file = pythonopen(filename, 'w')
@@ -67,11 +66,14 @@ def export(exportList, filename):
             fi = to_degrees(fi)
 
             if x_scaling:
-                r = r / 2.0
+                r = r * 2.0
 
             point = (r, fi)
 
-            append_point = (prev_point is None or (abs(prev_point[0] - point[0]) > x_accuracy and abs(prev_point[1] - point[1]) > c_accuracy))
+            append_point = (
+                prev_point is None or
+                (abs(prev_point[0] - point[0]) > x_accuracy and abs(prev_point[1] - point[1]) > c_accuracy) or
+                abs(prev_point[1] - point[1]) > c_max_step)
 
             if append_point:
                 prev_point = point
