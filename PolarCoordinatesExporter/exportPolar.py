@@ -49,7 +49,7 @@ def export(exportList, filename):
     x_accuracy = parameters.GetFloat('xCoordinateAccuracyThreshold')
     c_accuracy = parameters.GetFloat('cCoordinateAccuracyThreshold')
     c_max_step = parameters.GetFloat('cCoordinateMaxStep')
-    x_scaling = parameters.GetBool('halfXCoordinate')
+    x_scaling = parameters.GetBool('doubleXCoordinate')
 
     FreeCAD.Console.PrintMessage('Export params step: {}, x_ac: {}, c_ac: {}, c_max: {}, x_scaling: {}\n'.format(
         step, x_accuracy, c_accuracy, c_max_step, x_scaling))
